@@ -1,0 +1,12 @@
+package ir.ayantech.advertisement.core
+
+object AdType {
+    const val AD_MOB_BANNER = "AD_MOB_BANNER"
+    const val AD_MOB_INTERSTITIAL = "AD_MOB_INTERSTITIAL"
+    const val AD_MOB_NATIVE = "AD_MOB_NATIVE"
+    const val AD_MOB_REWARDED_VIDEO = "AD_MOB_REWARDED_VIDEO"
+    const val TAPSELL_BANNER = "TAPSELL_BANNER"
+    const val TAPSELL_INTERSTITIAL = "TAPSELL_INTERSTITIAL"
+    const val TAPSELL_NATIVE = "TAPSELL_NATIVE"
+    const val TAPSELL_REWARDED_VIDEO = "TAPSELL_REWARDED_VIDEO"
+}

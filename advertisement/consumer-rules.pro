@@ -173,25 +173,25 @@
 ##---------------Begin: proguard configuration for Vungle  ----------
 
 # Vungle
--keep class com.vungle.warren.** { *; }
--keep class com.vungle.warren.downloader.DownloadRequest
--dontwarn com.vungle.warren.error.VungleError$ErrorCode
--dontwarn com.vungle.warren.downloader.DownloadRequest$Status
--keepclassmembers enum com.vungle.warren.** { *; }
+#-keep class com.vungle.warren.** { *; }
+#-keep class com.vungle.warren.downloader.DownloadRequest
+#-dontwarn com.vungle.warren.error.VungleError$ErrorCode
+#-dontwarn com.vungle.warren.downloader.DownloadRequest$Status
+#-keepclassmembers enum com.vungle.warren.** { *; }
 
 # Moat SDK
--keep class com.moat.** { *; }
--dontwarn com.moat.**
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
--keepattributes *Annotation*
+#-keep class com.moat.** { *; }
+#-dontwarn com.moat.**
+#-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+#-keepattributes *Annotation*
 
 ##---------------End: proguard configuration for Vungle  ----------
 
 ##---------------Begin: proguard configuration for AppLovin  ----------
 
--dontwarn com.applovin.**
--libraryjars libs/applovin-sdk-6.3.0.jar
--keep class com.applovin.** { *; }
--keep class com.google.android.gms.ads.identifier.** { *; }
+#-dontwarn com.applovin.**
+#-libraryjars libs/applovin-sdk-6.3.0.jar
+#-keep class com.applovin.** { *; }
+#-keep class com.google.android.gms.ads.identifier.** { *; }
 
 ##---------------End: proguard configuration for AppLovin  ----------

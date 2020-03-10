@@ -3,7 +3,6 @@ package ir.ayantech.advertisement.core
 import android.app.Activity
 import android.view.ViewGroup
 import ir.ayantech.advertisement.R
-import ir.ayantech.advertisement.config.TapsellConfig
 import ir.ayantech.advertisement.helper.SimpleCallback
 import ir.ayantech.advertisement.helper.StringCallback
 import ir.tapsell.plus.AdRequestCallback
@@ -23,11 +22,11 @@ object TapsellAdvertisement {
     ) {
         TapsellPlus.requestRewardedVideo(
             activity,
-            TapsellConfig.getTapsellRewardedVideoZoneID(),
+            AyanAdvertisementCore.tapsellRewardedVideoZoneID(),
             object : AdRequestCallback() {
                 override fun response() {
                     super.response()
-                    ready?.invoke()
+                    ready.invoke()
                 }
 
                 override fun error(message: String?) {
@@ -44,7 +43,7 @@ object TapsellAdvertisement {
         rewarded: SimpleCallback? = null,
         fail: StringCallback? = null
     ) {
-        TapsellPlus.showAd(activity, TapsellConfig.getTapsellRewardedVideoZoneID(), object :
+        TapsellPlus.showAd(activity, AyanAdvertisementCore.tapsellRewardedVideoZoneID(), object :
             AdShowListener() {
             override fun onClosed() {
                 closed?.invoke()
@@ -71,7 +70,7 @@ object TapsellAdvertisement {
     ) {
         TapsellPlus.requestInterstitial(
             activity,
-            TapsellConfig.getTapsellInterstitialZoneID(),
+            AyanAdvertisementCore.tapsellInterstitialZoneID(),
             object : AdRequestCallback() {
                 override fun response() {
                     ready.invoke()
@@ -90,7 +89,7 @@ object TapsellAdvertisement {
         rewarded: SimpleCallback? = null,
         fail: StringCallback? = null
     ) {
-        TapsellPlus.showAd(activity, TapsellConfig.getTapsellInterstitialZoneID(), object :
+        TapsellPlus.showAd(activity, AyanAdvertisementCore.tapsellInterstitialZoneID(), object :
             AdShowListener() {
             override fun onClosed() {
                 closed?.invoke()
@@ -118,7 +117,7 @@ object TapsellAdvertisement {
     ) {
         TapsellPlus.showBannerAd(activity,
             viewGroup,
-            TapsellConfig.getTapsellBannerZoneID(),
+            AyanAdvertisementCore.tapsellBannerZoneID(),
             TapsellPlusBannerType.BANNER_320x50,
             object :
                 AdRequestCallback() {

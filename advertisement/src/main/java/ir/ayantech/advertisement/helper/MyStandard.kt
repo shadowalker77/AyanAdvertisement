@@ -16,3 +16,5 @@ typealias RewardedAdCallBack = (RewardedAd) -> Unit
 typealias RewardItemCallBack = (RewardItem) -> Unit
 
 typealias StringCallback = (String) -> Unit
+
+typealias StringReturn = () -> String

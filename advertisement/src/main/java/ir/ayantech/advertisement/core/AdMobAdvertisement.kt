@@ -5,11 +5,8 @@ import android.view.ViewGroup
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.formats.NativeAdOptions
 import com.google.android.gms.ads.formats.UnifiedNativeAd
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import ir.ayantech.advertisement.config.AdMobConfig
 import ir.ayantech.advertisement.helper.*
 
 object AdMobAdvertisement {
@@ -29,7 +26,7 @@ object AdMobAdvertisement {
     ) {
         val adView = AdView(viewGroup.context)
         adView.adSize = AdSize.BANNER
-        adView.adUnitId = AdMobConfig.getAdMobBannerUnitID()
+        adView.adUnitId = AyanAdvertisementCore.adMobBannerUnitID()
         adView.adListener = simplifiedAdListener(
             ready,
             fail,
@@ -52,7 +49,7 @@ object AdMobAdvertisement {
         closed: SimpleCallback? = null
     ) {
         val interstitialAd = InterstitialAd(activity)
-        interstitialAd.adUnitId = AdMobConfig.getAdMobInterstitialUnitID()
+        interstitialAd.adUnitId = AyanAdvertisementCore.adMobInterstitialUnitID()
         interstitialAd.adListener = simplifiedInterstitialAdListener(
             interstitialAd,
             ready,
@@ -74,7 +71,7 @@ object AdMobAdvertisement {
         leftApplication: SimpleCallback? = null,
         closed: SimpleCallback? = null
     ) {
-        val adLoader = AdLoader.Builder(activity, AdMobConfig.getAdMobNativeUnitID())
+        val adLoader = AdLoader.Builder(activity, AyanAdvertisementCore.adMobNativeUnitID())
             .forUnifiedNativeAd { ad: UnifiedNativeAd ->
                 ready?.invoke(ad)
             }
@@ -100,7 +97,7 @@ object AdMobAdvertisement {
         ready: RewardedAdCallBack,
         fail: StringCallback? = null
     ) {
-        val rewardedAd = RewardedAd(activity, AdMobConfig.getAdMobRewardedVideoUnitID())
+        val rewardedAd = RewardedAd(activity, AyanAdvertisementCore.adMobRewardedVideoUnitID())
         val adLoadCallback = object: RewardedAdLoadCallback() {
             override fun onRewardedAdLoaded() {
                 ready(rewardedAd)

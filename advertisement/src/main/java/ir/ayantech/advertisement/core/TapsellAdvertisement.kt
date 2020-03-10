@@ -11,8 +11,8 @@ import ir.tapsell.plus.TapsellPlus
 import ir.tapsell.plus.TapsellPlusBannerType
 
 object TapsellAdvertisement {
-    internal fun initialize(activity: Activity) {
-        TapsellPlus.initialize(activity, activity.resources.getString(R.string.tapsell_api_key))
+    internal fun initialize(activity: Activity, tapsellApiKey: String) {
+        TapsellPlus.initialize(activity, tapsellApiKey)
     }
 
     fun requestVideoAds(

@@ -14,24 +14,31 @@ object AyanAdvertisementCore {
     var adMobNativeUnitID: StringReturn = { "ca-app-pub-3940256099942544/2247696110" }
     var adMobRewardedVideoUnitID: StringReturn = { "ca-app-pub-3940256099942544/5224354917" }
 
+    private var tapsellApiKey: StringReturn = { "alsoatsrtrotpqacegkehkaiieckldhrgsbspqtgqnbrrfccrtbdomgjtahflchkqtqosa" }
+
     fun initialize(
         activity: Activity,
         tapsellRewardedVideoZoneID: StringReturn? = null,
         tapsellInterstitialZoneID: StringReturn? = null,
         tapsellBannerZoneID: StringReturn? = null,
+        tapsellApiKey: StringReturn? = null,
         adMobBannerUnitID: StringReturn? = null,
         adMobInterstitialUnitID: StringReturn? = null,
         adMobNativeUnitID: StringReturn? = null,
         adMobRewardedVideoUnitID: StringReturn? = null
     ) {
-        AdMobAdvertisement.initialize(activity)
-        TapsellAdvertisement.initialize(activity)
         tapsellRewardedVideoZoneID?.let { this.tapsellRewardedVideoZoneID = it }
         tapsellInterstitialZoneID?.let { this.tapsellInterstitialZoneID = it }
         tapsellBannerZoneID?.let { this.tapsellBannerZoneID = it }
+
+        tapsellApiKey?.let { this.tapsellApiKey = it }
+
         adMobBannerUnitID?.let { this.adMobBannerUnitID = it }
         adMobInterstitialUnitID?.let { this.adMobInterstitialUnitID = it }
         adMobNativeUnitID?.let { this.adMobNativeUnitID = it }
         adMobRewardedVideoUnitID?.let { this.adMobRewardedVideoUnitID = it }
+
+        AdMobAdvertisement.initialize(activity)
+        TapsellAdvertisement.initialize(activity, tapsellApiKey())
     }
 }

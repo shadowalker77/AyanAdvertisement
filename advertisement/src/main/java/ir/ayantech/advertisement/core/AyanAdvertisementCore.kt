@@ -11,6 +11,7 @@ object AyanAdvertisementCore {
 
     var adMobBannerUnitID: StringReturn = { "ca-app-pub-3940256099942544/6300978111" }
     var adMobInterstitialUnitID: StringReturn = { "ca-app-pub-3940256099942544/1033173712" }
+    var adMobSecondInterstitialUnitID: StringReturn = { "ca-app-pub-3940256099942544/1033173712" }
     var adMobNativeUnitID: StringReturn = { "ca-app-pub-3940256099942544/2247696110" }
     var adMobRewardedVideoUnitID: StringReturn = { "ca-app-pub-3940256099942544/5224354917" }
 
@@ -24,6 +25,7 @@ object AyanAdvertisementCore {
         tapsellApiKey: StringReturn? = null,
         adMobBannerUnitID: StringReturn? = null,
         adMobInterstitialUnitID: StringReturn? = null,
+        adMobSecondInterstitialUnitID: StringReturn? = null,
         adMobNativeUnitID: StringReturn? = null,
         adMobRewardedVideoUnitID: StringReturn? = null
     ) {
@@ -35,6 +37,7 @@ object AyanAdvertisementCore {
 
         adMobBannerUnitID?.let { this.adMobBannerUnitID = it }
         adMobInterstitialUnitID?.let { this.adMobInterstitialUnitID = it }
+        adMobSecondInterstitialUnitID?.let { this.adMobSecondInterstitialUnitID = it }
         adMobNativeUnitID?.let { this.adMobNativeUnitID = it }
         adMobRewardedVideoUnitID?.let { this.adMobRewardedVideoUnitID = it }
 

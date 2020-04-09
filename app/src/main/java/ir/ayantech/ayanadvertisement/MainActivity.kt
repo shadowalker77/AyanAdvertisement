@@ -18,10 +18,13 @@ class MainActivity : AppCompatActivity() {
         AyanAdvertisementCore.initialize(this)
 
         adMobInterstitial.setOnClickListener {
-            AdMobAdvertisement.requestAdMobInterstitial(this,
-                ready = {
-                    it.show()
-                })
+            AdMobAdvertisement.showInterstitialAd(this,
+            fail = {
+                Log.e("InterAd", it)
+            },
+            closed = {
+                Log.d("InterAd", "closed")
+            })
         }
 
         adMobRewardedVideo.setOnClickListener {

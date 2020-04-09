@@ -11,8 +11,82 @@ import ir.ayantech.advertisement.helper.*
 
 object AdMobAdvertisement {
 
+    private var interstitialAd: InterstitialAd? = null
+    private var secondInterstitialAd: InterstitialAd? = null
+
     internal fun initialize(activity: Activity) {
         MobileAds.initialize(activity)
+        requestAdMobInterstitial(
+            activity,
+            AyanAdvertisementCore.adMobInterstitialUnitID(),
+            ready = {
+                interstitialAd = it
+            })
+        requestAdMobInterstitial(
+            activity,
+            AyanAdvertisementCore.adMobSecondInterstitialUnitID(),
+            ready = {
+                secondInterstitialAd = it
+            })
+    }
+
+    fun showInterstitialAd(
+        activity: Activity,
+        fail: StringCallback? = null,
+        opened: SimpleCallback? = null,
+        clicked: SimpleCallback? = null,
+        leftApplication: SimpleCallback? = null,
+        closed: SimpleCallback? = null
+    ) {
+        var interstitialAdToReturn: InterstitialAd? = null
+        when {
+            interstitialAd != null -> {
+                interstitialAdToReturn = interstitialAd
+                interstitialAd = null
+                requestAdMobInterstitial(
+                    activity,
+                    AyanAdvertisementCore.adMobInterstitialUnitID(),
+                    ready = {
+                        interstitialAd = it
+                    })
+            }
+            secondInterstitialAd != null -> {
+                interstitialAdToReturn = secondInterstitialAd
+                secondInterstitialAd = null
+                requestAdMobInterstitial(
+                    activity,
+                    AyanAdvertisementCore.adMobSecondInterstitialUnitID(),
+                    ready = {
+                        secondInterstitialAd = it
+                    })
+            }
+        }
+        interstitialAdToReturn?.adListener = simplifiedAdListener(
+            null,
+            fail,
+            opened,
+            clicked,
+            leftApplication,
+            closed
+        )
+        interstitialAdToReturn?.show()
+        if (interstitialAdToReturn == null) {
+            fail?.invoke("NoAd")
+        }
+    }
+
+    private fun requestAdMobInterstitial(
+        activity: Activity,
+        unitId: String,
+        ready: InterstitialAdCallBack
+    ) {
+        val interstitialAd = InterstitialAd(activity)
+        interstitialAd.adUnitId = unitId
+        interstitialAd.adListener = simplifiedInterstitialAdListener(
+            interstitialAd,
+            ready, null, null, null, null, null
+        )
+        interstitialAd.loadAd(AdRequest.Builder().build())
     }
 
     fun requestAdMobBanner(
@@ -37,29 +111,6 @@ object AdMobAdvertisement {
         )
         adView.loadAd(AdRequest.Builder().build())
         viewGroup.addView(adView)
-    }
-
-    fun requestAdMobInterstitial(
-        activity: Activity,
-        ready: InterstitialAdCallBack,
-        fail: StringCallback? = null,
-        opened: SimpleCallback? = null,
-        clicked: SimpleCallback? = null,
-        leftApplication: SimpleCallback? = null,
-        closed: SimpleCallback? = null
-    ) {
-        val interstitialAd = InterstitialAd(activity)
-        interstitialAd.adUnitId = AyanAdvertisementCore.adMobInterstitialUnitID()
-        interstitialAd.adListener = simplifiedInterstitialAdListener(
-            interstitialAd,
-            ready,
-            fail,
-            opened,
-            clicked,
-            leftApplication,
-            closed
-        )
-        interstitialAd.loadAd(AdRequest.Builder().build())
     }
 
     fun requestAdMobNative(
@@ -98,10 +149,11 @@ object AdMobAdvertisement {
         fail: StringCallback? = null
     ) {
         val rewardedAd = RewardedAd(activity, AyanAdvertisementCore.adMobRewardedVideoUnitID())
-        val adLoadCallback = object: RewardedAdLoadCallback() {
+        val adLoadCallback = object : RewardedAdLoadCallback() {
             override fun onRewardedAdLoaded() {
                 ready(rewardedAd)
             }
+
             override fun onRewardedAdFailedToLoad(errorCode: Int) {
                 fail?.invoke(errorCode.toString())
             }

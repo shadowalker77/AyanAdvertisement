@@ -120,9 +120,10 @@ object AdMobAdvertisement {
         opened: SimpleCallback? = null,
         clicked: SimpleCallback? = null,
         leftApplication: SimpleCallback? = null,
-        closed: SimpleCallback? = null
+        closed: SimpleCallback? = null,
+        customAdUnit: String? = null
     ) {
-        val adLoader = AdLoader.Builder(activity, AyanAdvertisementCore.adMobNativeUnitID())
+        val adLoader = AdLoader.Builder(activity, customAdUnit ?: AyanAdvertisementCore.adMobNativeUnitID())
             .forUnifiedNativeAd { ad: UnifiedNativeAd ->
                 ready?.invoke(ad)
             }
